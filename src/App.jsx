@@ -1,4 +1,6 @@
 import BootScreen from "./components/BootScreen";
+import {Route , Routes} from 'react-router-dom'
+import QuestionsScreen from "./components/QuestionsScreen";
 
 function App() {
   
@@ -10,7 +12,10 @@ function App() {
         src="../src/assets/yellow.png"
         className="h-9 sm:h-20 absolute left-[300px] sm:left-[410px] xl:left-[410px] mt-2"
       />
-       <BootScreen/>
+      <Routes>
+        <Route path="/" element={<BootScreen/>}/>
+        <Route path="/question/:category" element={<QuestionsScreen/>}/>
+      </Routes>
       <img
         src="../src/assets/blue.png"
         className="h-8 sm:h-20 absolute right-[298px] top-[276px] sm:left-[1px] sm:top-[428px] "
