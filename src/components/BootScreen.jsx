@@ -2,55 +2,71 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const questionCategory = [
-  { id: 1, category: "Any Category" },
-  { id: 2, category: "Entertainment: Books" },
-  { id: 3, category: "Entertainment: Film" },
-  { id: 4, category: "Entertainment: Music" },
-  { id: 5, category: "Entertainment: Musicals & Theatres" },
-  { id: 6, category: "Entertainment: Television" },
-  { id: 7, category: "Entertainment: Video Games" },
-  { id: 8, category: "Entertainment: Board Games" },
-  { id: 9, category: "Science & Nature" },
-  { id: 10, category: "Science: Computers" },
-  { id: 11, category: "Science: Mathematics" },
-  { id: 12, category: "Mythology" },
-  { id: 13, category: "Sports" },
-  { id: 14, category: "Geography" },
-  { id: 15, category: "Politics" },
-  { id: 16, category: "Art" },
-  { id: 17, category: "Celebrities" },
-  { id: 18, category: "Animals" },
-  { id: 19, category: "Vehicles" },
-  { id: 20, category: "Entertainment: Comics" },
-  { id: 21, category: "Science: Gadgets" },
-  { id: 22, category: "Entertainment: Japanese Anime & Manga" },
-  { id: 23, category: "Entertainment: Cartoon & Animations" }
+  { id: 1, category: "Any Category" , categoryNum: 0},
+  { id: 2, category: "Entertainment: Books" , categoryNum: 10},
+  { id: 3, category: "Entertainment: Film" , categoryNum: 11},
+  { id: 4, category: "Entertainment: Music" , categoryNum: 12},
+  { id: 5, category: "Entertainment: Musicals & Theatres" , categoryNum: 13},
+  { id: 6, category: "Entertainment: Television" , categoryNum: 14},
+  { id: 7, category: "Entertainment: Video Games" , categoryNum: 15 },
+  { id: 8, category: "Entertainment: Board Games" , categoryNum: 16},
+  { id: 9, category: "Science & Nature" , categoryNum: 17},
+  { id: 10, category: "Science: Computers" , categoryNum: 18},
+  { id: 11, category: "Science: Mathematics" , categoryNum: 19 },
+  { id: 12, category: "Mythology" , categoryNum: 20},
+  { id: 13, category: "Sports" , categoryNum: 21},
+  { id: 14, category: "Geography" , categoryNum: 22},
+  { id: 15, category: "Politics" , categoryNum: 24},
+  { id: 16, category: "Art" , categoryNum: 25},
+  { id: 17, category: "Celebrities" , categoryNum: 26},
+  { id: 18, category: "Animals" , categoryNum: 27},
+  { id: 19, category: "Vehicles" , categoryNum:  28},
+  { id: 20, category: "Entertainment: Comics" , categoryNum: 29}
 ]
 
 const BootScreen = () => {
-  const [category, setCategory] = useState("Any Category")
+
+  const [category, setCategory] = useState({
+    category: "Any Category",
+    categoryNumber: 0
+  })
+
+  
+
   const navigate = useNavigate()
 
   const startQuiz = (e) => {
-    e.preventDefault()
-    navigate(`/question/${category}`)
+    e.preventDefault();
+    navigate(`/question/${category.categoryNumber}`); 
+  }
+
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = questionCategory.find(el => el.category == e.target.value)
+     if(selectedCategory) {
+      setCategory(
+        {
+          category: selectedCategory.category,
+          categoryNumber: selectedCategory.categoryNum
+        }
+      )
+     }
   }
 
 
   return (
-    <div className="open-screen bg-white sm:w-[500px] sm:h-[500px] h-[300px] mt-2 flex justify-center items-center">
-      <div className="flex flex-col items-center p-10 gap-3">
+      <div className="flex flex-col items-center px-10 py-3 gap-3">
         <div className="text-center">
-          <h2 className="text-[#293264] text-2xl sm:text-3xl font-serif">Quizzical</h2>
+          <h2 className="text-[#293264] text-2xl sm:text-3xl font-serif mb-2">Quizzical</h2>
           <h5 className="text-[#293264] sm:font-bold">Let us have a quiz!</h5>
         </div>
-        <form className='flex flex-col w-full items-center' onSubmit={startQuiz}>
-          <div className='py-3 px-1 w-full'>
+        <form className='w-full' onSubmit={startQuiz}>
+          <div className='py-5 px-3 w-full flex flex-col items-center justify-center gap-4'>
             <select 
               name='questionCategory' 
               id='questionCategory' 
-              className='p-2 border border-black w-full h-10 box-border rounded-lg'
-              onChange={(e) => setCategory(e.target.value)}
+              className='p-2 border border-slate-800 w-full h-10 box-border rounded-lg'
+              onChange={handleCategoryChange}
             >
               {questionCategory.map(el => (
                 <option key={el.id} value={el.category}>
@@ -58,16 +74,16 @@ const BootScreen = () => {
                 </option>
               ))}
             </select>
-          </div>
           <button 
             type="submit" 
-            className="bg-[#293264] text-white px-5 py-1 rounded-lg font-bold"
+            className="bg-[#4D5B9E] text-white px-5 py-1 rounded-xl font-bold"
           >
             Start Quiz
           </button>
+          </div>
         </form>
       </div>
-    </div>
+
   );
 };
 
