@@ -55,8 +55,13 @@ const BootScreen = () => {
 
 
   return (
+    <div className="bg-[#f5f7fb] w-[300px] sm:w-[600px] sm:h-[500px] h-[300px] mt-2 flex justify-center items-center">
+       <img
+        src="../src/assets/yellow.png"
+        className="h-9 sm:h-20 absolute left-[260px]  sm:left-[510px] top-2"
+      />
       <div className="flex flex-col items-center px-10 py-3 gap-3">
-        <div className="text-center">
+        <div className="text-center mt-10 md:mt-24">
           <h2 className="text-[#293264] text-2xl sm:text-3xl font-serif mb-2">Quizzical</h2>
           <h5 className="text-[#293264] sm:font-bold">Let us have a quiz!</h5>
         </div>
@@ -65,7 +70,7 @@ const BootScreen = () => {
             <select 
               name='questionCategory' 
               id='questionCategory' 
-              className='p-2 border border-slate-800 w-full h-10 box-border rounded-lg'
+              className='p-2 border border-slate-800 w-64 sm:w-80 h-10 box-border rounded-lg'
               onChange={handleCategoryChange}
             >
               {questionCategory.map(el => (
@@ -82,6 +87,11 @@ const BootScreen = () => {
           </button>
           </div>
         </form>
+      </div>
+      <img
+        src="../src/assets/blue.png"
+        className="h-8 sm:h-20 absolute right-[298px] top-[276px] left-[1px] sm:top-[428px] "
+      />
       </div>
 
   );
